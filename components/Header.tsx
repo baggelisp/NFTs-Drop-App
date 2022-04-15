@@ -15,10 +15,10 @@ export default function Header() {
     return (
         <div className='sticky top-0 p-5 z-50  shadow-sm
         border-b-2 border-yellow-300 '>
-            <div className='justify-between	md:flex max-w-screen-xl mx-auto align-middle block'>
-                <h1 className='text-3xl text-center text-yellow-300 flex align-middle md:justify-start justify-center'>
+            <div className='justify-between	md:flex max-w-screen-xl mx-auto items-center block'>
+                <h1 className='text-3xl text-center text-yellow-300 flex items-center md:justify-start justify-center'>
                     <Image className='rounded-full' width={40} height={40} src={'/all-images.gif'}></Image>
-                    <span className='ml-2'>GRADIENTS NTF</span>
+                    <span className='ml-2'>GRADIENTS</span>
                 </h1>
                 {
                     !address ? 
