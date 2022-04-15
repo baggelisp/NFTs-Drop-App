@@ -13,7 +13,8 @@ export default function Header() {
         border-b-2 border-yellow-300 '>
             <div className='justify-between	flex max-w-screen-xl mx-auto align-middle'>
                 <h1 className='text-3xl text-center text-yellow-300 flex align-middle'>
-                    Gradients NFTs
+                    <Image className='rounded-full' width={40} height={40} src={'/all-images.gif'}></Image>
+                    <span className='ml-2'>Gradients NFTs</span>
                 </h1>
                 <div className='justify-between	flex'>
                     <button onClick={doLogin} className='px-5 py-2 bg-white rounded-lg text-yellow-300 flex items-center'>LOGIN WITH METAMASK <FaBeer  className='ml-2'/></button>
