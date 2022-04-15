@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 function MainSection() {
   return (
-    <div className=' max-w-6xl mx-auto my-10 flex justify-between'>
+    <div className=' max-w-6xl mx-auto my-10 md:flex justify-between block'>
       {/* left section */}
-      <div className='w-[55%] pt-10'>
+      <div className='md:w-[55%] pt-10'>
         <h1 className='text-4xl font-bold text-white my-5'>
             GRADIENTS NTF COLLECTION
         </h1>
@@ -20,9 +20,9 @@ function MainSection() {
 
       {/* right section */}
 
-      <div className='w-[45%] flex flex-wrap justify-center pt-4'>
+      <div className='md:w-[45%] flex flex-wrap justify-center pt-4'>
         <div>
-          <Image className='rounded-sm ' width={180} height={180} src={'/4.png'}></Image>
+          <Image className='rounded-sm ' width={180} height={180} src={'/16.png'}></Image>
         </div>
         <div className='top-[10px] left-[13px] relative'>
           <Image className='rounded-sm' width={180} height={180} src={'/5.png'}></Image>
