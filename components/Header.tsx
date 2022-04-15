@@ -12,6 +12,12 @@ export default function Header() {
     const address = useAddress();
     const disconnect = useDisconnect();
 
+    const doLogin = () => {
+        connectWithMetamask().then( res => {
+            if (res.error) alert("Please install MetaMask on your browser.");
+        })
+    }
+
     return (
         <div className='sticky top-0 p-5 z-50  shadow-sm
         border-b-2 border-yellow-300 '>
@@ -23,7 +29,7 @@ export default function Header() {
                 {
                     !address ? 
                 <div className='md:justify-between justify-center flex mt-2 md:mt-0'>
-                    <button onClick={connectWithMetamask} className='px-5 py-2 bg-white rounded-lg hover:bg-yellow-50 text-yellow-400 flex items-center'> LOGIN WITH METAMASK <FiLogIn  className='ml-2'/></button>
+                    <button onClick={doLogin} className='px-5 py-2 bg-white rounded-lg hover:bg-yellow-50 text-yellow-400 flex items-center'> LOGIN WITH METAMASK <FiLogIn  className='ml-2'/></button>
                 </div>
                 :
                 <div className='md:justify-between justify-center flex mt-2 md:mt-0'>
