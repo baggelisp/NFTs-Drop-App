@@ -1,7 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
+import { useAddress } from '@thirdweb-dev/react';
 
 function MainSection() {
+  const address = useAddress();
+  
   return (
     <div className=' max-w-6xl mx-auto my-10 md:flex justify-between block'>
       {/* left section */}
@@ -14,20 +17,24 @@ function MainSection() {
           itaque doloremque quaerat aperiam, recusandae nostrum obcaecati enim non fugiat laudantium ratione 
           dolore debitis.
         </h2>
-        <button className='h-16 w-full rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-20'>MINT NFT (0.01 ETH)</button>
+        <div className='mt-20'></div>
+        {
+          address ?  <p className='text-sm text-yellow-100  text-center'>Connected with {address} </p> : ''
+        }
+        <button disabled={!address} className='h-16 w-full disabled:opacity-70 hover:shadow-yellow-100 hover:shadow-md rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-2'>MINT NFT (0.01 ETH)</button>
 
       </div>
 
       {/* right section */}
 
-      <div className='md:w-[45%] flex flex-wrap justify-center pt-4'>
+      <div className='md:w-[45%] md:flex flex-wrap justify-center pt-4 hidden'>
         <div>
           <Image className='rounded-sm ' width={180} height={180} src={'/16.png'}></Image>
         </div>
-        <div className='top-[10px] left-[13px] relative'>
+        <div className='top-[20px] left-[13px] relative'>
           <Image className='rounded-sm' width={180} height={180} src={'/5.png'}></Image>
         </div>
-        <div className='top-[10px] relative'>
+        <div className='top-[0px] relative'>
           <Image className='rounded-sm' width={180} height={180} src={'/6.png'}></Image>
         </div>
         <div className='top-[20px] left-[13px] relative'>
