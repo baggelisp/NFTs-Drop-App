@@ -36,13 +36,6 @@ export default function Header() {
                     <button onClick={disconnect} className='px-5 py-2 bg-white rounded-lg hover:bg-yellow-50 text-yellow-400 flex items-center'> DISCONNECT {truncateEthAddress(address)}</button>
                 </div>
                 }
-                
-
-
-
-                {/* <h2 className='text-1xl mx-auto text-center text-pink-500 mt-2'>
-                    Your Address: {user?.get('ethAddress')}
-                </h2> */}
             </div>
         </div>
     )

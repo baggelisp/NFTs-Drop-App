@@ -18,6 +18,7 @@ function MainSection() {
           dolore debitis.
         </h2>
         <div className='mt-20'></div>
+        <p className='text-md text-gray-300  text-center'>13 / 21 NFT's claimed</p>
         {
           address ?  <p className='text-sm text-yellow-100  text-center'>Connected with {address} </p> : ''
         }
@@ -28,17 +29,17 @@ function MainSection() {
       {/* right section */}
 
       <div className='md:w-[45%] md:flex flex-wrap justify-center pt-4 hidden'>
-        <div>
-          <Image className='rounded-sm ' width={180} height={180} src={'/16.png'}></Image>
+        <div className='border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+          <Image className='' width={180} height={180} src={'/16.png'}></Image>
         </div>
-        <div className='top-[20px] left-[13px] relative'>
-          <Image className='rounded-sm' width={180} height={180} src={'/5.png'}></Image>
+        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+          <Image className='' width={180} height={180} src={'/5.png'}></Image>
         </div>
-        <div className='top-[0px] relative'>
-          <Image className='rounded-sm' width={180} height={180} src={'/6.png'}></Image>
+        <div className='top-[0px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+          <Image className='' width={180} height={180} src={'/6.png'}></Image>
         </div>
-        <div className='top-[20px] left-[13px] relative'>
-          <Image className='rounded-sm' width={180} height={180} src={'/7.png'}></Image>
+        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+          <Image className='' width={180} height={180} src={'/7.png'}></Image>
         </div>
       </div>
       
