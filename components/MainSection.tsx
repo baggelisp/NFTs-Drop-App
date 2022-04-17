@@ -3,12 +3,14 @@ import { BigNumber } from 'ethers';
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAddress } from '@thirdweb-dev/react';
+import toast, { Toaster } from 'react-hot-toast';
 
 function MainSection() {
   const address = useAddress();
   const [claimedSupply, setClaimedSupply] = useState<number>(0);
   const [totalSupply, setTotalSupply] = useState<BigNumber>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [mintingIsOn, setMintingIsOn] = useState<boolean>(false);
   const [priceEth, setPriceEth] = useState<string>();
 
 
@@ -41,29 +43,58 @@ function MainSection() {
 
   const mintNFT = () => {
     if (!nftDrop || !address) return;
-    setLoading(true);
+    setMintingIsOn(true);
+    const notification = toast.loading('Minting...', {
+      style: {
+        fontWeight: 'bolder',
+        fontSize: '17px',
+        padding: '20px 40px'
+      }
+    })
     const quantity = 1;
     nftDrop?.claimTo(address, quantity).then( async (tx) => {
       const receipt = tx[0].receipt;
       const claimedTokenId = tx[0].id;
       const claimedNFT = await tx[0].data();
+      toast.success('You successfully Minted!', {
+        duration: 8000,
+        style: {
+          fontWeight: 'bolder',
+          fontSize: '17px',
+          padding: '20px'
+        }
+      });
       console.log(receipt);
       console.log(claimedTokenId);
       console.log(claimedNFT);
       const imageUrl = claimedNFT.metadata.image
+      setClaimedSupply(claimedSupply + 1);
       // const openSeaUrl = `https://testnets.opensea.io/assets/${nftDropAddress}/${claimedNFT.metadata.name}`
       // console.log(openSeaUrl)
 
     }).catch(err => {
-      console.log(err)
+      toast('Something went wrong!', {
+        duration: 8000,
+        style: {
+          background: 'red',
+          color: 'white',
+          fontWeight: 'bolder',
+          fontSize: '17px',
+          padding: '20px'
+        }
+      });
     }).finally ( () => {
-      setLoading(false);
+      setMintingIsOn(false);
+      toast.dismiss(notification)
     })
 
   }
 
   return (
     <div className=' max-w-6xl mx-auto my-10 md:flex justify-between block'>
+      {/* Toast */}
+      <Toaster position="bottom-center" reverseOrder={false}/>
+
       {/* left section */}
       <div className='md:w-[55%] pt-10'>
         <h1 className='text-4xl font-bold text-white my-5'>
@@ -97,9 +128,9 @@ function MainSection() {
             'LOADING...'
             : claimedSupply == totalSupply?.toNumber() ? 'SOLD OUT'
             : !address ? 'SIGN IN TO MINT' 
+            : mintingIsOn ? 'MINTING...'
             : <span className='font-bold'>MINT NFT ({priceEth} ETH)</span>}
         </button>
-
       </div>
 
       {/* right section */}
