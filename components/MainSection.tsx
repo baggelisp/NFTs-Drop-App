@@ -1,10 +1,33 @@
-import React from 'react'
+import { useNFTDrop } from '@thirdweb-dev/react';
+import { BigNumber } from 'ethers';
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useAddress } from '@thirdweb-dev/react';
 
 function MainSection() {
   const address = useAddress();
-  
+  const [claimedSupply, setClaimedSupply] = useState<number>(0);
+  const [totalSupply, setTotalSupply] = useState<BigNumber>();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const nftDropAddress = '0xd7D1ee62Ca3728Ff2DFA0FAE15a7655242b48997';
+  const nftDrop = useNFTDrop(nftDropAddress);
+
+  useEffect( () => {
+    const fetchNFTDropData = async () => {
+      setLoading(true);
+      const claimed = await nftDrop?.getAllClaimed();
+      const total = await nftDrop?.totalSupply();
+      setClaimedSupply(claimed?.length || 0);
+      setTotalSupply(total);
+      setLoading(false);
+    }
+
+    fetchNFTDropData();
+
+  } , [])
+
+
   return (
     <div className=' max-w-6xl mx-auto my-10 md:flex justify-between block'>
       {/* left section */}
@@ -18,7 +41,19 @@ function MainSection() {
           dolore debitis.
         </h2>
         <div className='mt-20'></div>
-        <p className='text-md text-gray-300  text-center'>13 / 21 NFT's claimed</p>
+        {
+          loading ? 
+          <p className='text-md text-gray-300  text-center animate-pulse'>Loading Supply Count...</p>
+          :
+          <p className='text-md text-gray-300  text-center'>{claimedSupply} / {totalSupply?.toString()} NFT's claimed</p>
+        }
+
+        {/* {
+          loading && (
+            <img src='https://i.pinimg.com/originals/a4/f2/cb/a4f2cb80ff2ae2772e80bf30e9d78d4c.gif'/>
+          )
+        } */}
+        
         {
           address ?  <p className='text-sm text-yellow-100  text-center'>Connected with {address} </p> : ''
         }
@@ -29,16 +64,16 @@ function MainSection() {
       {/* right section */}
 
       <div className='md:w-[45%] md:flex flex-wrap justify-center pt-4 hidden'>
-        <div className='border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+        <div className='border-4 h-[180px] overflow-hidden border-white border-opacity-20 rounded-md'>
           <Image className='' width={180} height={180} src={'/16.png'}></Image>
         </div>
-        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-20 rounded-md'>
           <Image className='' width={180} height={180} src={'/5.png'}></Image>
         </div>
-        <div className='top-[0px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+        <div className='top-[0px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-20 rounded-md'>
           <Image className='' width={180} height={180} src={'/6.png'}></Image>
         </div>
-        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-60 rounded-sm'>
+        <div className='top-[20px] left-[18px] relative border-4 h-[180px] overflow-hidden border-white border-opacity-20 rounded-md'>
           <Image className='' width={180} height={180} src={'/7.png'}></Image>
         </div>
       </div>
