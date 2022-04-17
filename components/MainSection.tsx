@@ -61,7 +61,7 @@ function MainSection() {
         style: {
           fontWeight: 'bolder',
           fontSize: '17px',
-          padding: '20px'
+          padding: '20px 40px'
         }
       });
       console.log(receipt);
@@ -80,7 +80,7 @@ function MainSection() {
           color: 'white',
           fontWeight: 'bolder',
           fontSize: '17px',
-          padding: '20px'
+          padding: '20px 40px'
         }
       });
     }).finally ( () => {
