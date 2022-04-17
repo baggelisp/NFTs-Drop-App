@@ -9,10 +9,22 @@ function MainSection() {
   const [claimedSupply, setClaimedSupply] = useState<number>(0);
   const [totalSupply, setTotalSupply] = useState<BigNumber>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [priceEth, setPriceEth] = useState<string>();
+
 
   const nftDropAddress = '0xd7D1ee62Ca3728Ff2DFA0FAE15a7655242b48997';
   const nftDrop = useNFTDrop(nftDropAddress);
 
+  useEffect( () => {
+    const fetchPrice = async () => {
+      setLoading(true);
+      const claimConditions = await nftDrop?.claimConditions.getAll();
+      setPriceEth(claimConditions?.[0].currencyMetadata.displayValue);
+      setLoading(false);
+    }
+    fetchPrice();
+  } , [])
+  
   useEffect( () => {
     const fetchNFTDropData = async () => {
       setLoading(true);
@@ -27,6 +39,9 @@ function MainSection() {
 
   } , [])
 
+  const mintNFT = () => {
+
+  }
 
   return (
     <div className=' max-w-6xl mx-auto my-10 md:flex justify-between block'>
@@ -57,7 +72,14 @@ function MainSection() {
         {
           address ?  <p className='text-sm text-yellow-100  text-center'>Connected with {address} </p> : ''
         }
-        <button disabled={!address} className='h-16 w-full disabled:opacity-70 hover:shadow-yellow-100 hover:shadow-md rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-2'>MINT NFT (0.01 ETH)</button>
+        <button disabled={!address || loading || claimedSupply === totalSupply?.toNumber()} className='h-16 w-full disabled:opacity-50 hover:shadow-yellow-100 hover:shadow-md rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-2'>
+          
+          { loading ? 
+            'LOADING...'
+            : claimedSupply == totalSupply?.toNumber() ? 'SOLD OUT'
+            : !address ? 'SIGN IN TO MINT' 
+            : <span className='font-bold'>MINT NFT ({priceEth} ETH)</span>}
+        </button>
 
       </div>
 
