@@ -40,6 +40,25 @@ function MainSection() {
   } , [])
 
   const mintNFT = () => {
+    if (!nftDrop || !address) return;
+    setLoading(true);
+    const quantity = 1;
+    nftDrop?.claimTo(address, quantity).then( async (tx) => {
+      const receipt = tx[0].receipt;
+      const claimedTokenId = tx[0].id;
+      const claimedNFT = await tx[0].data();
+      console.log(receipt);
+      console.log(claimedTokenId);
+      console.log(claimedNFT);
+      const imageUrl = claimedNFT.metadata.image
+      // const openSeaUrl = `https://testnets.opensea.io/assets/${nftDropAddress}/${claimedNFT.metadata.name}`
+      // console.log(openSeaUrl)
+
+    }).catch(err => {
+      console.log(err)
+    }).finally ( () => {
+      setLoading(false);
+    })
 
   }
 
@@ -72,7 +91,7 @@ function MainSection() {
         {
           address ?  <p className='text-sm text-yellow-100  text-center'>Connected with {address} </p> : ''
         }
-        <button disabled={!address || loading || claimedSupply === totalSupply?.toNumber()} className='h-16 w-full disabled:opacity-50 hover:shadow-yellow-100 hover:shadow-md rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-2'>
+        <button onClick={mintNFT} disabled={!address || loading || claimedSupply === totalSupply?.toNumber()} className='h-16 w-full disabled:opacity-50 hover:shadow-yellow-100 hover:shadow-md rounded-full bg-gradient-to-bl from-yellow-200  to-yellow text-white mt-2'>
           
           { loading ? 
             'LOADING...'
