@@ -2,7 +2,7 @@
 
 🆕 I just released a NFT Drop page for my Gradients collection (just a test collection).
 
-Features:
+Features: <br />
 ✅ Deploy Blockchain Smart Contract with ThirdWeb <br />
 ✅ Mint NFT <br />
 ✅ Code with React & Next.js <br />
