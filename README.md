@@ -1,6 +1,6 @@
 # NFT Drop Page
 
-🆕 I just released a NFT Drop page for my Gradients collection (just a test collection).
+🆕 NFT Drop page for my Gradients collection (just a test collection).
 
 Features: <br />
 ✅ Deploy Blockchain Smart Contract with ThirdWeb <br />
